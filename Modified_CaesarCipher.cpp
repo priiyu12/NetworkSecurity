@@ -59,7 +59,7 @@ void decrypt(){
     	}
     }
 
-    cout<<"Decypted Text : "<<decryptText;
+    cout<<"Decrypted Text : "<<decryptText;
 }
 int main()
 {
