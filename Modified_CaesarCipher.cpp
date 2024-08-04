@@ -1,84 +1,76 @@
-//Modified_CaesarCipher.cpp
 #include<iostream>
 #include<string>
+
 using namespace std;
 
 void encrypt(){
-	string plainText;
-	string cipherText;
-	int element;
-	cout << "Enter Plain Text: ";
-    getline(cin, plainText);
+    string plainText;
+    cout<<"Enter Plain Text: ";
+    getline(cin,plainText);
 
     int key;
-    cout << "Enter key: ";
-    cin >> key;
+    cout<<"Enter key: ";
+    cin>>key;
+
+    string cipherText;
 
     for (int i = 0; i < plainText.length(); i++)
     {
-    	if(plainText[i] == ' ')
-    		cipherText += plainText[i];
-
-    	else if(isupper(plainText[i])){
-    		element = int(plainText[i]) + key;
-    		cipherText += static_cast<char>(element);
-    	}
-
-    	else{
-    		element = int(plainText[i]) + key;
-    		cipherText += static_cast<char>(element);
-    	}
+        if(plainText[i] == ' ')
+            cipherText += plainText[i];
+        else{
+            if(isupper(plainText[i])){
+                int val = (plainText[i] - 'A' + key) % 26;
+                cipherText += static_cast<char>(val + 'A');
+            }
+            else{
+                int val = (plainText[i] - 'a' + key) % 26;
+                cipherText += static_cast<char>(val + 'a');
+            }
+        }
     }
-
     cout<<"Cipher Text : "<<cipherText;
 }
 void decrypt(){
-	string decryptText;
-	string cipherText;
-	int element;
-	cout << "Enter Cipher Text: ";
-    getline(cin, cipherText);
+    string cipherText;
+    cout<<"Enter Cipher Text: ";
+    getline(cin,cipherText);
 
     int key;
-    cout << "Enter key: ";
-    cin >> key;
+    cout<<"Enter key: ";
+    cin>>key;
+
+    string plainText;
 
     for (int i = 0; i < cipherText.length(); i++)
     {
-    	if(cipherText[i] == ' ')
-    		decryptText += cipherText[i];
-
-    	else if(isupper(cipherText[i])){
-    		element = int(cipherText[i]) - key;
-    		decryptText += static_cast<char>(element);
-    	}
-
-    	else{
-    		element = int(cipherText[i]) - key;
-    		decryptText += static_cast<char>(element);
-    	}
+        if(cipherText[i] == ' ')
+            plainText += cipherText[i];
+        else{
+            if(isupper(cipherText[i])){
+                int val = (cipherText[i] - 'A' - key + 26) % 26;
+                plainText += static_cast<char>(val + 'A');
+            }
+            else{
+               int val = (cipherText[i] - 'a' - key + 26) % 26;
+                plainText += static_cast<char>(val + 'a');
+            }
+        }
     }
-
-    cout<<"Decrypted Text : "<<decryptText;
+    cout<<"Plain Text : "<<plainText;
 }
 int main()
 {
-	int ch;
-	cout<<"Choose : "<<endl<<"1. Encryption\t2. Decryption"<<endl;
-	cin>>ch;
-	cin.ignore();
-	switch(ch){
-		case 1:
-			encrypt();
-			break;
+    int ch;
+    cout<<"Choose: \n1,Encryption\n2.Decryption\n";
+    cin>>ch;
+    cin.ignore();
 
-		case 2:
-			decrypt();
-			break;
-
-		default :
-			cout<<"Invalid choice!";
-	}
-
-	return 0;
+    if (ch == 1)
+        encrypt();
+    else if(ch == 2)
+        decrypt();
+    else
+        cout<<"Invalid Choice!";
+    return 0;
 }
