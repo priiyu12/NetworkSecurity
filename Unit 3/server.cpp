@@ -14,15 +14,15 @@ int main() {
     bind(server_fd, (sockaddr*)&addr, sizeof(addr));
     listen(server_fd, 3);
     
-    int client_socket = accept(server_fd, nullptr, nullptr);
+    int client_fd = accept(server_fd, nullptr, nullptr);
     
-    send(client_socket, "Hello from Server", 17, 0);
+    send(client_fd, "Hello from Server", 17, 0);
     
     char buffer[1024] = {0};
-    read(client_socket, buffer, 1024);
+    read(client_fd, buffer, 1024);
     std::cout << buffer << std::endl;
     
-    close(client_socket);
+    close(client_fd);
     close(server_fd);
     return 0;
 }

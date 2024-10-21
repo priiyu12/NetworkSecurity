@@ -19,7 +19,7 @@ int main(){
 	//Step 3 : phi = (p-1) * (q-1)
 	int phi = (p-1)*(q-1);
 
-	//Step 4 : Assume e (gcd(phi))
+	//Step 4 : Assume e
 	int e;
 	while(true){
 		cout<<"Enter e: ";
@@ -47,13 +47,15 @@ int main(){
 	int message;
 	cout<<"Enter message : ";
 	cin>>message;
+	
 	int result = pow(message, e);
 	int cipherText = result % n;
+	
 	result = pow(cipherText, d);
 	int plainText = result % n;
 
 	if(plainText!=message)
-		cout<<"Error: Invalid Message deryption";
+		cout<<"Error: Invalid Message decryption";
 	else
 		cout<<"Cipher Text: "<<cipherText;
 }
