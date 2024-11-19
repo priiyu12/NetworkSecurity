@@ -19,46 +19,39 @@ void encrypt(){
         if(plainText[i] == ' ')
             cipherText += plainText[i];
         else{
-            if(isupper(plainText[i])){
-                int val = (plainText[i] - 'A' + key) % 26;
-                cipherText += static_cast<char>(val + 'A');
-            }
-            else{
-                int val = (plainText[i] - 'a' + key) % 26;
-                cipherText += static_cast<char>(val + 'a');
-            }
+            if(isupper(plainText[i]))
+                cipherText += char(int(plainText[i] + key - 'A') % 26 + 'A');
+            else
+                cipherText += char(int(plainText[i] + key - 'a') % 26 + 'a');
         }
     }
     cout<<"Cipher Text : "<<cipherText;
 }
-void decrypt(){
+void decrypt() {
     string cipherText;
-    cout<<"Enter Cipher Text: ";
-    getline(cin,cipherText);
+    cout << "Enter Cipher Text: ";
+    getline(cin, cipherText);
 
     int key;
-    cout<<"Enter key: ";
-    cin>>key;
+    cout << "Enter key: ";
+    cin >> key;
 
     string plainText;
 
-    for (int i = 0; i < cipherText.length(); i++)
-    {
-        if(cipherText[i] == ' ')
+    for (int i = 0; i < cipherText.length(); i++) {
+        if (cipherText[i] == ' ') {
             plainText += cipherText[i];
-        else{
-            if(isupper(cipherText[i])){
-                int val = (cipherText[i] - 'A' - key + 26) % 26;
-                plainText += static_cast<char>(val + 'A');
-            }
-            else{
-               int val = (cipherText[i] - 'a' - key + 26) % 26;
-                plainText += static_cast<char>(val + 'a');
+        } else {
+            if (isupper(cipherText[i])) {
+                plainText += char((cipherText[i] - key - 'A' + 26) % 26 + 'A');
+            } else {
+                plainText += char((cipherText[i] - key - 'a' + 26) % 26 + 'a');
             }
         }
     }
-    cout<<"Plain Text : "<<plainText;
+    cout << "Plain Text : " << plainText;
 }
+
 int main()
 {
     int ch;
